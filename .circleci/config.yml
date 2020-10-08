@@ -15,11 +15,11 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: bramba/nginx
+          image: bramba/nginx:latest
           tag: "latest,$CIRCLE_SHA1"
       - docker/push:
           digest-path: /tmp/digest.txt
-          image: bramba/nginx
+          image: bramba/nginx:latest
           tag: "latest,$CIRCLE_SHA1"
       - run:
           command: |
