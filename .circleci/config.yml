@@ -52,4 +52,5 @@ workflows:
       - deploy:
           requires:
             - build-and-push
+            - tester
      
