@@ -1,0 +1,54 @@
+version: 2.1
+jobs:
+  tester:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
+
+  build-and-push:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: bramba/nginx
+          tag: "latest,$CIRCLE_SHA1"
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: bramba/nginx
+          tag: "latest,$CIRCLE_SHA1"
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+            echo "hello world!!!"
+  deploy:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            pip install ecs-deploy
+      - run:
+          name: Deploy
+          command: |
+            ecs deploy $ECS_CLUSTER_NAME $ECS_SERVICE --image website-service bramba/nginx:$CIRCLE_SHA1 --timeout 1200 --ignore-warnings --region $AWS_REGION
+orbs:
+  docker: circleci/docker@1.4.0
+workflows:
+  version: 2
+  finaltest:
+    jobs:
+      - tester
+      - build-and-push:
+          requires:
+            - tester
+      - deploy:
+          requires:
+            - build-and-push
+            - tester
