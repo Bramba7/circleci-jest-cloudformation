@@ -1,6 +1,6 @@
 # final version
 
-### v10.0
+### v10.2
 
 circlercli
 jest
