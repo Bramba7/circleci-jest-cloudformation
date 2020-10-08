@@ -40,6 +40,7 @@ jobs:
             ecs deploy $ECS_CLUSTER_NAME $ECS_SERVICE --image website-service bramba/nginx:$CIRCLE_SHA1 --timeout 1200 --ignore-warnings --region $AWS_REGION
 orbs:
   docker: circleci/docker@1.4.0
+
 workflows:
   version: 2
   finaltest:
