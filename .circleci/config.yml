@@ -46,9 +46,7 @@ workflows:
   finaltest:
     jobs:
       - tester
-      - build-and-push:
-          requires:
-            - tester
+      - build-and-push
       - deploy:
           requires:
             - build-and-push
