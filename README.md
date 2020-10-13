@@ -4,6 +4,20 @@
 
 ## Overview
 
+## Prerequisities
+
+In order to run this container you'll need docker installed.
+
+- [Windows](https://docs.docker.com/windows/started)
+- [OS X](https://docs.docker.com/mac/started/)
+- [Linux](https://docs.docker.com/linux/started/)
+
+Node.js installation.
+
+- [Windows](https://phoenixnap.com/kb/install-node-js-npm-on-windows)
+- [OS X](https://treehouse.github.io/installation-guides/mac/node-mac.html)
+- [Linux](https://www.npmjs.com/get-npm/)
+
 ## Steps to Run
 
 ### AWS CloudFormation
@@ -32,8 +46,8 @@ circleci-jest-cloudformation
 │   └── config.yml           # → CircleCI 2.0 Config
 ├── images/
 │   ├── launchstack.png      # → CloudFormation icon launch
-│   ├── build_tests.sh       # →
-│   └── shunit2-2.1.7.tar.gz # →
+│   ├──                      # →
+│   └──                      # →
 ├── .gitignore               # → File that should not be push
 ├── Dockerfile               # → Uses to build a custom nginx container
 ├── README.md                # → Info about the github repo
@@ -49,6 +63,28 @@ circleci-jest-cloudformation
 
 Log in [CircleCI](https://circleci.com/) webpage with Github account.
 
-Add for documentation:
-https://jestjs.io/docs/en/getting-started.html
-https://hub.docker.com/r/circleci/node
+### Environment variables in CircleCI
+
+```
+AWS_ACCESS_KEY_ID
+AWS_REGION
+AWS_SECRET_ACCESS_KEY
+DOCKER_LOGIN
+DOCKER_PASSWORD
+ECS_CLUSTER_NAME
+ECS_SERVICE
+```
+
+### NPM installation and Run
+
+```
+npm init
+```
+
+### Jest installation and config
+
+```
+npm install --save-dev jest
+```
+
+[Jest Config Info](https://jestjs.io/docs/en/getting-started.html)
