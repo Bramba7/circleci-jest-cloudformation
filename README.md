@@ -4,7 +4,7 @@
 
 ## Overview
 
-## Prerequisities
+## Prerequisites
 
 In order to run this container you'll need docker installed.
 
